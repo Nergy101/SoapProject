@@ -1,7 +1,6 @@
 package com.koop.services;
 
 public class Betaling {
-	private int id;
 	private String name;
 	private String adres;
 	private int bedrag;

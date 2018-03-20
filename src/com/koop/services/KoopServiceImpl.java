@@ -6,7 +6,26 @@ import java.util.concurrent.TimeUnit;
 
 public class KoopServiceImpl {
 	private static List<Product> productCatalog;
+	
+	public int getBetaling(String naam, String adres, int bedrag) throws Exception {
+		Betaling betaling = new Betaling (naam, adres, bedrag);
+		// doe iets met de betaling in het echte leven
+		int counter = 0;
 
+		// wacht 30sec
+		try {
+			TimeUnit.SECONDS.sleep(30);
+			int randomNum = ThreadLocalRandom.current().nextInt(0, 999999 + 1);
+			counter += 1;
+			return randomNum;
+		} catch (InterruptedException e) {
+			System.out.println("Kon niet wachten!");
+			e.printStackTrace();
+			throw new Exception("Transactie niet gelukt");
+		}
+		
+	}
+//////////////////////////////////////////////////////////////////////////////////////////////////
 	public KoopServiceImpl() {
 		initializeProductCatalog();
 	}
@@ -30,24 +49,7 @@ public class KoopServiceImpl {
 		return products;
 	}
 
-	public int getBetaling(String naam, String adres, int bedrag) throws Exception {
-		Betaling betaling = new Betaling (naam, adres, bedrag);
-		// doe iets met de betaling in het echte leven
-		int counter = 0;
 
-		// wacht 30sec
-		try {
-			TimeUnit.SECONDS.sleep(30);
-			int randomNum = ThreadLocalRandom.current().nextInt(0, 999999 + 1);
-			counter += 1;
-			return randomNum;
-		} catch (InterruptedException e) {
-			System.out.println("Kon niet wachten!");
-			e.printStackTrace();
-			throw new Exception("Transactie niet gelukt");
-		}
-		
-	}
 
 	public void insertProduct(Product product) {
 		productCatalog.add(product);

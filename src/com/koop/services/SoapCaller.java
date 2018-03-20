@@ -6,7 +6,7 @@ public class SoapCaller {
 
     public static void main(String args[]) {
         
-        String soapEndpointUrl = "http://localhost:8080/soap-project/services/KoopServiceImpl";
+        String soapEndpointUrl = "http://localhost:8989/soap-project/services/KoopServiceImpl";
         String soapAction = "http://services.koop.com/KoopServiceImpl/getBetalingRequest";
 
         callSoapWebService(soapEndpointUrl, soapAction);
@@ -16,7 +16,7 @@ public class SoapCaller {
         SOAPPart soapPart = soapMessage.getSOAPPart();
 
         String myNamespace = "ser";
-        String myNamespaceURI = "http://localhost:8080/soap-project/services/KoopServiceImpl";
+        String myNamespaceURI = "http://localhost:8989/soap-project/services/KoopServiceImpl";
 
         // SOAP Envelope
         SOAPEnvelope envelope = soapPart.getEnvelope();
