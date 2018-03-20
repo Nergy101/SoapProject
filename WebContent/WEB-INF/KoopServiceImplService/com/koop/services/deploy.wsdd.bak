@@ -1,0 +1,47 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from KoopServiceImplService WSDL service -->
+
+  <service name="KoopServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://services.koop.com"/>
+      <parameter name="wsdlServiceElement" value="KoopServiceImplService"/>
+      <parameter name="schemaQualified" value="http://services.koop.com"/>
+      <parameter name="wsdlServicePort" value="KoopServiceImpl"/>
+      <parameter name="className" value="com.koop.services.KoopServiceImplSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="KoopServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="getBetaling" qname="operNS:getBetaling" xmlns:operNS="http://services.koop.com" returnQName="retNS:getBetalingReturn" xmlns:retNS="http://services.koop.com" returnType="rtns:int" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="pns:naam" xmlns:pns="http://services.koop.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:adres" xmlns:pns="http://services.koop.com" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="pns:bedrag" xmlns:pns="http://services.koop.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="searchById" qname="operNS:searchById" xmlns:operNS="http://services.koop.com" returnQName="retNS:searchByIdReturn" xmlns:retNS="http://services.koop.com" returnType="rtns:Product" xmlns:rtns="http://services.koop.com" soapAction="" >
+        <parameter qname="pns:id" xmlns:pns="http://services.koop.com" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="insertProduct" qname="operNS:insertProduct" xmlns:operNS="http://services.koop.com" soapAction="" >
+        <parameter qname="pns:product" xmlns:pns="http://services.koop.com" type="tns:Product" xmlns:tns="http://services.koop.com"/>
+      </operation>
+      <operation name="getAllProducts" qname="operNS:getAllProducts" xmlns:operNS="http://services.koop.com" returnQName="retNS:getAllProductsReturn" xmlns:retNS="http://services.koop.com" returnType="rtns:Product" xmlns:rtns="http://services.koop.com" soapAction="" >
+      </operation>
+      <parameter name="allowedMethods" value="getAllProducts getBetaling searchById insertProduct"/>
+
+      <typeMapping
+        xmlns:ns="http://services.koop.com"
+        qname="ns:Product"
+        type="java:com.koop.services.Product"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle=""
+      />
+  </service>
+</deployment>
